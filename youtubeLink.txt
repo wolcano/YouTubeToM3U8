@@ -1,4 +1,26 @@
-## FORMAT: <channel name> - <Country>
+## FORMAT: <channel name> - <group>
 
-Chillhop Music (jazzy & lofi hip hop beats) - US
+Chillhop Music (jazzy & lofi hip hop beats) - Music
 https://www.youtube.com/watch?v=5yx6BWlEVcY
+
+Avex J-Pop 24/7 - Music
+https://www.youtube.com/watch?v=tr77RbnfYIU
+
+Spinnin' Records 24/7 - Music
+https://www.youtube.com/watch?v=Oaq9uRxsJhQ
+
+Nourish Lofi Hiphop Radio - Music
+https://www.youtube.com/watch?v=IjMESxJdWkg
+
+JapanesePod101 Live - Education
+https://www.youtube.com/watch?v=r4IIGxAcRpg
+
+Sky News - News
+https://www.youtube.com/watch?v=9Auq9mYxFEE
+
+France 24 (English) - News
+https://www.youtube.com/watch?v=h3MuIUNCCzI
+
+CNA - News
+https://www.youtube.com/watch?v=XWq5kBlakcQ
+
