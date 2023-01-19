@@ -1,5 +1,7 @@
-# YouTubeLinkGrabber
-This repo automatically converts YouTube live streams into a single .m3u8 playlist. The stream URLs are stored in a text file, which a Python script parses and builds the .m3u8 file from when a GitHub action is triggered (triggered by a cron job). A direct link can then be used to get the playlist, which automatically updates.
+# YouTubeToM3U8
+This repo automatically converts YouTube live streams into a single .m3u8 playlist and keeps them updated. The stream URLs are stored in a text file, which a Python script parses and builds the .m3u8 file from when a GitHub action is triggered (triggered by a cron job). A direct link can then be used to get the playlist, which can then be used in an IPTV app or xTeVe.
+
+With thanks to [@victorlish](https://github.com/victorlish/YouTubeLinkGrabber) for the original project
 
 ## Usage
 1. Open the `youtubeLink.txt` file.
@@ -16,3 +18,7 @@ You can also run the program locally by `python YouTubeLinkGrabber.py > YouTubeL
 
 4. The .m3u8 file will be generated again. You can use the following direct path to the .m3u8 file in your IPTV app:
 `https://raw.githubusercontent.com/<your-username-here>/YouTubeLinkGrabber/main/youtube.m3u8`
+
+## Future additions
+- [ ] Support for channel icons/images
+- [ ] Support for TV guides/EPG matching
