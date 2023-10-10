@@ -1,103 +1,106 @@
-## FORMAT: <channel name> - <group>
+## FORMAT: <channel name> || <channel id> || <category>
+## <channel name> can be anything - either stream or channel name. It will appear on the EPG though.
+## <channel id> is used to match EPG data to the M3U8 playlist, so make it short and with no spaces. End it in '.yt' to show its from YouTube.
+## <category> is used to group streams, so something like 'Music' or 'News' is recommended.
 
-Chillhop Music (jazzy & lofi hip hop beats) - Music
+Chillhop Music (jazzy & lofi hip hop beats) || Chillhop.yt || Music
 https://www.youtube.com/watch?v=5yx6BWlEVcY
 
-Avex J-Pop 24/7 - Music
+Avex J-Pop 24/7 || Avex.yt || Music
 https://www.youtube.com/watch?v=tr77RbnfYIU
 
-Tomorrowland: One World Radio - Music
+Tomorrowland: One World Radio || TOWR.yt || Music
 https://www.youtube.com/watch?v=wBgSH-CGPzg
 
-JapanesePod101 Live - Education
+JapanesePod101 Live || JPod101.yt || Education
 https://www.youtube.com/watch?v=c3nH0tIpK68
 
-Korea.net Live - Education
+Korea.net Live || KoreaNet.yt || Education
 https://www.youtube.com/watch?v=ym_Tf2dSWGY
 
-Sky News - News
+Sky News || SkyNews.yt || News
 https://www.youtube.com/watch?v=9Auq9mYxFEE
 
-France 24 (English) - News
+France 24 (English) || France24En.yt || News
 https://www.youtube.com/watch?v=tkDUSYHoKxE
 
-CGTN Europe - News
+CGTN Europe || CGTN Europe.yt || News
 https://www.youtube.com/watch?v=UP5z9dRC6RU
 
-CNA - News
+CNA || CNA.yt || News
 https://www.youtube.com/watch?v=XWq5kBlakcQ
 
-ABC News (US) - News
+ABC News (US) || ABCNewsUS.yt || News
 https://www.youtube.com/watch?v=OOtxXPaQvoM
 
-ABC News (AU) - News
+ABC News (AU) || ABCNewsAU.yt ||  News
 https://www.youtube.com/watch?v=vOTiJkg1voo
 
-Bloomberg Global - News
+Bloomberg Global || Bloomberg.yt || News
 https://www.youtube.com/watch?v=dp8PhLsUcFE
 
-Euronews - News
+Euronews || EuronewsEN.yt || News
 https://www.youtube.com/watch?v=pykpO5kQJ98
 
-NDTV 24x7 - News
+NDTV 24x7 || NDTV.yt || News
 https://www.youtube.com/watch?v=Nen3UXaWDDE
 
-Al Jazeera English - News
+Al Jazeera English || AlJazeera.yt || News
 https://www.youtube.com/watch?v=gCNeDWCI0vo
 
-TRT World - News
+TRT World || TRTWorld.yt || News
 https://www.youtube.com/watch?v=5VF4aor94gw
 
-CNBC Marathon - News
+CNBC Marathon || CNBCMarathon.yt || News
 https://www.youtube.com/watch?v=9NyxcX3rhQs
 
-DW News - News
+DW News || DWNews.yt || News
 https://www.youtube.com/watch?v=pqabxBKzZ6M
 
-NHK World Japan - News
+NHK World Japan || NHKWorld.yt || News
 https://www.youtube.com/watch?v=f0lYkdA-Gtw
 
-Relaxing Jazz Piano Radio - Music
+Relaxing Jazz Piano Radio || JazzRadio.yt || Music
 https://www.youtube.com/watch?v=Dx5qFachd3A
 
-Epidemic Pop - Music
+Epidemic Pop || EpidemicPop.yt || Music
 https://www.youtube.com/watch?v=wrEckgZZapI
 
-TOKYO Cafe - Music
+TOKYO Cafe || TokyoCafe.yt || Music
 https://www.youtube.com/watch?v=6uddGul0oAc
 
-Rainy Jazz: Relaxing Jazz & Bossa Nova Music Radio - Music
+Rainy Jazz: Relaxing Jazz & Bossa Nova Music Radio || RainyJazz.yt || Music
 https://www.youtube.com/watch?v=DSGyEsJ17cI
 
-Little Soul: Music to put you in a better mood - Music
+Little Soul: Music to put you in a better mood || LittleSoul.yt || Music
 https://www.youtube.com/watch?v=XstikgbeTPI
 
-Lofi Girl: lofi hip hop radio (beats to relax/study to) - Music
+Lofi Girl: lofi hip hop radio (beats to relax/study to) || LofiGirl1.yt || Music
 https://www.youtube.com/watch?v=jfKfPfyJRdk
 
-Lofi Girl: lofi hip hop radio (beats to sleep/chill to) - Music
+Lofi Girl: lofi hip hop radio (beats to sleep/chill to) || LofiGirl2.yt || Music
 https://www.youtube.com/watch?v=rUxyKA_-grg
 
-Jazz Cafe Ambience - Music
+Jazz Cafe Ambience || JazzCafeAmbience.yt || Music
 https://www.youtube.com/watch?v=AEKtQW93OVg
 
-Abao in Tokyo: jazz/lofi hip hop radio - Music
+Abao in Tokyo: jazz/lofi hip hop radio || AbaoInTokyo.yt || Music
 https://www.youtube.com/watch?v=HAZoLuME-PU
 
-The Good Life Radio - Music
+The Good Life Radio || GoodLifeRadio.yt || Music
 https://www.youtube.com/watch?v=36YnV9STBqc
 
-Vibing with KPop with KBS WORLD TV - Music
+Vibing with KPop with KBS WORLD TV || KBSWorldKPop.yt || Music
 https://www.youtube.com/watch?v=LyTgySIJ9lY
 
-KBS KOREA Live - News
+KBS KOREA Live || KBSKorea.yt || News
 https://www.youtube.com/watch?v=OxQQsIvJTTU
 
-FeelingInTheBeat Radio - Music
+FeelingInTheBeat Radio || FeelingInTheBeat.yt || Music
 https://www.youtube.com/watch?v=Ix3kXeAyXfA
 
-NASA Starbase Live - Live
+NASA Starbase Live || NASALive.yt || Live
 https://www.youtube.com/watch?v=mhJRzQsLZGg
 
-渋谷スクランブル交差点 Shibuya Scramble Crossing Live Camera - Live
+渋谷スクランブル交差点 Shibuya Scramble Crossing Live Camera || ShibuyaScramble.yt || Live
 https://www.youtube.com/watch?v=3kPH7kTphnE
