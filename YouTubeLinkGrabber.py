@@ -1,16 +1,28 @@
 #! /usr/bin/python3
-import requests
 import os
-import unicodedata
 from datetime import datetime, timedelta
+
+import pytz
+import requests
 from lxml import etree
 
-
+tz = pytz.timezone('Europe/London')
 channels = []
 
-# From https://stackoverflow.com/questions/4324790/removing-control-characters-from-a-string-in-python
-def remove_control_characters(s):
-    return "".join(ch for ch in s if unicodedata.category(ch)[0]!="C")
+
+def generate_times(curr_dt: datetime):
+    last_hour = curr_dt.replace(microsecond=0, second=0, minute=0)
+    last_hour = tz.localize(last_hour)
+    start_dates = [last_hour]
+
+    for x in range(7):
+        last_hour += timedelta(hours=3)
+        start_dates.append(last_hour)
+    end_dates = start_dates[1:]
+    end_dates.append(start_dates[-1] + timedelta(hours=3))
+
+    return start_dates, end_dates
+
 
 def build_xml_tv(streams: list) -> bytes:
     data = etree.Element("tv")
@@ -24,38 +36,43 @@ def build_xml_tv(streams: list) -> bytes:
         name.set("lang", "en")
         name.text = stream[0]
 
-    # TODO: Make this less static - i.e. generate the next 6 hour blocks from time run rather than midnight
-    dt_format = '%Y%m%d%H%M%S %z'
-    start_times = ["000000", "060000", "120000", "180000"]
-    end_times = ["060000", "120000", "180000", "000000"]
+        dt_format = '%Y%m%d%H%M%S %z'
+        start_dates, end_dates = generate_times(datetime.now())
 
-    for i in range(4):
-        programme = etree.SubElement(data, 'programme')
-        start = datetime.combine(datetime.today().date(), datetime.strptime(start_times[i], "%H%M%S").time()).strftime(dt_format)
-        if i < 3:
-            end = datetime.combine(datetime.today().date(), datetime.strptime(end_times[i], "%H%M%S").time()).strftime(dt_format)
-        else:
-            end = datetime.combine((datetime.today() + timedelta(days=1)).date(), datetime.strptime(end_times[i], "%H%M%S").time()).strftime(dt_format)
+        for idx, val in enumerate(start_dates):
+            programme = etree.SubElement(data, 'programme')
+            programme.set("channel", stream[1])
+            programme.set("start", val.strftime(dt_format))
+            programme.set("stop", end_dates[idx].strftime(dt_format))
 
-        print("")
+            title = etree.SubElement(programme, "title")
+            title.set('lang', 'en')
+            title.text = f"LIVE: {stream[0]}"
+            description = etree.SubElement(programme, "desc")
+            description.set('lang', 'en')
+            description.text = stream[0]
+
+    return etree.tostring(data, pretty_print=True, encoding='utf-8')
+
 
 def grab(url):
-    z = requests.get(url, timeout = 15)
-    response = requests.get(url, timeout = 15).text
+    z = requests.get(url, timeout=15)
+    response = requests.get(url, timeout=15).text
     if '.m3u8' not in response:
         print("https://www.youtube.com/watch?v=1oh9IEwBbFY")
         return
     end = response.find('.m3u8') + 5
     tuner = 100
     while True:
-        if 'https://' in response[end - tuner : end]:
-            link = response[end - tuner : end]
+        if 'https://' in response[end - tuner: end]:
+            link = response[end - tuner: end]
             start = link.find('https://')
             end = link.find('.m3u8') + 5
             break
         else:
             tuner += 5
-    print(f"{link[start : end]}")
+    print(f"{link[start: end]}")
+
 
 with open('./youtubeLink.txt', encoding='utf-8') as f:
     print("#EXTM3U")
@@ -69,12 +86,16 @@ with open('./youtubeLink.txt', encoding='utf-8') as f:
             channel_id = line[1].strip()
             category = line[2].strip().title()
             channels.append((channel_name, channel_id, category))
-            print(f'\n#EXTINF:-1 tvg-id="{channel_id}" tvg-name="{channel_name}" group-title="{category}", {channel_name}')
+            print(
+                f'\n#EXTINF:-1 tvg-id="{channel_id}" tvg-name="{channel_name}" group-title="{category}", {channel_name}')
         else:
             grab(line)
 
-build_xml_tv(channels)
-            
+channel_xml = build_xml_tv(channels)
+with open('epg.xml', 'wb') as f:
+    f.write(channel_xml)
+    f.close()
+
 if 'temp.txt' in os.listdir():
     os.system('rm temp.txt')
     os.system('rm watch*')
