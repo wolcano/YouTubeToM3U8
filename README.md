@@ -18,12 +18,15 @@ URL
 
 You can also run the program locally by `python YouTubeLinkGrabber.py > YouTubeLive.m3u` or by `chmod +x exec_grabber.sh && ./exec_grabber.sh`.
 
-4. The .m3u8 file will be generated again. You can use the following direct path to the .m3u8 file in your IPTV app:
-`https://raw.githubusercontent.com/<your-username-here>/YouTubeLinkGrabber/main/youtube.m3u8`
+4. The .m3u8 file will be generated again.
 
-5. The generated EPG can be found here:
-`TBC`
+## Files
+|           | Link                                                                       |
+|-----------|----------------------------------------------------------------------------|
+| M3U8 file | https://raw.githubusercontent.com/username/YouTubeToM3U8/main/youtube.m3u8 |
+| EPG       | https://raw.githubusercontent.com/username/YouTubeToM3U8/main/epg.xml      |
+
 
 ## Future additions
 - [ ] Support for channel icons/images
-- [ ] Support for TV guides/EPG matching
+- [x] Support for TV guides/EPG matching
