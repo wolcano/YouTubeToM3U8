@@ -11,13 +11,23 @@ channels = []
 
 
 def generate_times(curr_dt: datetime):
+    """
+Generate 3-hourly blocks of times based on a current date
+    :param curr_dt: The current time the script is executed
+    :return: A tuple that contains a list of start dates and a list of end dates
+    """
+    # Floor the last hour (e.g. 13:54:00 -> 13:00:00) and add timezone information
     last_hour = curr_dt.replace(microsecond=0, second=0, minute=0)
     last_hour = tz.localize(last_hour)
     start_dates = [last_hour]
 
+    # Generate start times that are spaced out by three hours
     for x in range(7):
         last_hour += timedelta(hours=3)
         start_dates.append(last_hour)
+
+    # Copy everything except the first start date to a new list, then add a final end date three hours after the last
+    # start date
     end_dates = start_dates[1:]
     end_dates.append(start_dates[-1] + timedelta(hours=3))
 
@@ -25,6 +35,11 @@ def generate_times(curr_dt: datetime):
 
 
 def build_xml_tv(streams: list) -> bytes:
+    """
+Build an XMLTV file based on provided stream information
+    :param streams: List of tuples containing channel/stream name, ID and category
+    :return: XML as bytes
+    """
     data = etree.Element("tv")
     data.set("generator-info-name", "youtube-live-epg")
     data.set("generator-info-url", "https://github.com/dp247/YouTubeToM3U8")
@@ -56,6 +71,10 @@ def build_xml_tv(streams: list) -> bytes:
 
 
 def grab(url):
+    """
+Grabs the live-streaming M3U8 file
+    :param url: The YouTube URL of the livestream
+    """
     z = requests.get(url, timeout=15)
     response = requests.get(url, timeout=15).text
     if '.m3u8' not in response:
@@ -74,6 +93,7 @@ def grab(url):
     print(f"{link[start: end]}")
 
 
+# Open text file and parse stream information and URL
 with open('./youtubeLink.txt', encoding='utf-8') as f:
     print("#EXTM3U")
     for line in f:
@@ -91,11 +111,13 @@ with open('./youtubeLink.txt', encoding='utf-8') as f:
         else:
             grab(line)
 
+# Time to build an XMLTV file based on stream data
 channel_xml = build_xml_tv(channels)
 with open('epg.xml', 'wb') as f:
     f.write(channel_xml)
     f.close()
 
+# Remove temp files from project dir
 if 'temp.txt' in os.listdir():
     os.system('rm temp.txt')
     os.system('rm watch*')
