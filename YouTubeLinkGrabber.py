@@ -5,6 +5,7 @@ from datetime import datetime, timedelta
 import pytz
 import requests
 from lxml import etree
+from bs4 import BeautifulSoup
 
 tz = pytz.timezone('Europe/London')
 channels = []
@@ -62,22 +63,31 @@ Build an XMLTV file based on provided stream information
 
             title = etree.SubElement(programme, "title")
             title.set('lang', 'en')
-            title.text = f"LIVE: {stream[0]}"
+            title.text = stream[3] if stream[3] != '' else f'LIVE: {stream[0]}'
             description = etree.SubElement(programme, "desc")
             description.set('lang', 'en')
-            description.text = stream[0]
+            description.text = stream[4] if stream[4] != '' else 'No description provided'
+            icon = etree.SubElement(programme, "icon")
+            icon.set('src', stream[5])
 
     return etree.tostring(data, pretty_print=True, encoding='utf-8')
 
 
-def grab(url):
+def grab(url: str):
     """
 Grabs the live-streaming M3U8 file
     :param url: The YouTube URL of the livestream
     """
-    z = requests.get(url, timeout=15)
-    response = requests.get(url, timeout=15).text
-    if '.m3u8' not in response:
+    if '&' in url:
+        url = url.split('&')[0]
+
+    requests.packages.urllib3.disable_warnings()
+    stream_info = requests.get(url, timeout=15)
+    response = stream_info.text
+    soup = BeautifulSoup(stream_info.text, features="html.parser")
+
+
+    if '.m3u8' not in response or stream_info.status_code != 200:
         print("https://www.youtube.com/watch?v=1oh9IEwBbFY")
         return
     end = response.find('.m3u8') + 5
@@ -87,11 +97,21 @@ Grabs the live-streaming M3U8 file
             link = response[end - tuner: end]
             start = link.find('https://')
             end = link.find('.m3u8') + 5
+
+            stream_title = soup.find("meta", property="og:title")["content"]
+            stream_desc = soup.find("meta", property="og:description")["content"]
+            stream_image_url = soup.find("meta", property="og:image")["content"]
+            channels.append((channel_name, channel_id, category, stream_title, stream_desc, stream_image_url))
+
             break
         else:
             tuner += 5
     print(f"{link[start: end]}")
 
+
+channel_name = ''
+channel_id = ''
+category = ''
 
 # Open text file and parse stream information and URL
 with open('./youtubeLink.txt', encoding='utf-8') as f:
@@ -105,7 +125,6 @@ with open('./youtubeLink.txt', encoding='utf-8') as f:
             channel_name = line[0].strip()
             channel_id = line[1].strip()
             category = line[2].strip().title()
-            channels.append((channel_name, channel_id, category))
             print(
                 f'\n#EXTINF:-1 tvg-id="{channel_id}" tvg-name="{channel_name}" group-title="{category}", {channel_name}')
         else:
