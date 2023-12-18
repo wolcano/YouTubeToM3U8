@@ -1,8 +1,8 @@
 name: LinkGrabber
 
 on:
-  schedule:
-    - cron: '0 */3 * * *'
+  # schedule:
+  #   - cron: '0 */3 * * *'
 
   pull_request:
     branches: [ main ]
@@ -20,8 +20,8 @@ jobs:
       - name: Grab Link
 
         run: |
-          git config --global user.email "dp247@hll.localhost"
-          git config --global user.name "dp247"
+          # git config --global user.email "dp247@hll.localhost"
+          # git config --global user.name "dp247"
           chmod +x exec_grabber.sh && ./exec_grabber.sh
           git add -A
           git commit -m "./youtubeLink.txt is updated."
